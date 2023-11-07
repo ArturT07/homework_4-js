@@ -1,7 +1,7 @@
 fetch("https://ajax.test-danit.com/api/swapi/films")
     .then(response => response.json())
     .then(data => {
-      // Отримали список фільмів
+
       displayFilms(data);
     })
     .catch(error => {
@@ -11,14 +11,14 @@ fetch("https://ajax.test-danit.com/api/swapi/films")
 function displayFilms(films) {
     const filmList = document.getElementById("film-list");
 
-    // Сортуємо фільми за номером епізоду
+
     films.sort((a, b) => a.episodeId - b.episodeId);
 
     films.forEach(film => {
         const listItem = document.createElement("li");
         listItem.innerHTML = `Епізод ${film.episodeId}: ${film.name}<br>${film.openingCrawl}`;
         listItem.addEventListener("click", () => {
-            // При натисканні на фільм виконуємо запит на отримання персонажів
+
             fetchCharacters(film);
         });
 
@@ -34,7 +34,7 @@ function fetchCharacters(film) {
   Promise.all(characterPromises)
       .then(responses => Promise.all(responses.map(response => response.json())))
       .then(characterData => {
-        // Отримали дані про персонажів фільму
+
         displayCharacters(film, characterData);
       })
       .catch(error => {
